@@ -1,0 +1,9 @@
+{
+  "name": "natal-aplicativo-receitas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aplicativo de Receitas Baratas e Lucrativas - Checkout Pix Cakto API",
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}

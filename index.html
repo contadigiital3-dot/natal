@@ -1,0 +1,1490 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aplicativo de Receitas Baratas e Lucrativas — 120 Receitas para Ceia de Natal</title>
+<meta name="description" content="Aplicativo de receitas baratas e lucrativas com 120 opções econômicas para preparar uma ceia de Natal completa sem gastar uma fortuna.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#14532d; --verde-2:#1f7a3f; --verde-claro:#e5f3e8;
+    --vermelho:#b3121f; --vermelho-2:#d62c3a; --vermelho-escuro:#7a0b14;
+    --bege:#f7efe1; --bege-2:#efe2c9; --dourado:#d9a93c; --dourado-2:#f5d27a;
+    --texto:#2b2320; --suave:#6b5d55; --branco:#fffdf8;
+    --raio:18px; --sombra:0 10px 30px rgba(60,30,10,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Nunito,system-ui,sans-serif;color:var(--texto);background:var(--bege);line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:36px}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .wrap{max-width:560px;margin:0 auto;padding:0 16px}
+  section{padding:56px 0}
+  h1,h2,h3{font-family:Montserrat,sans-serif;line-height:1.15}
+  h2{font-size:clamp(1.6rem,6.5vw,2.1rem);font-weight:900;text-align:center;text-transform:uppercase;letter-spacing:-.5px}
+  h2 .r{color:var(--vermelho)} h2 .g{color:var(--verde-2)}
+  .sub{text-align:center;color:var(--suave);margin:10px auto 0;max-width:440px}
+  .divisor{width:70px;height:4px;border-radius:4px;margin:14px auto 0;background:linear-gradient(90deg,var(--verde-2),var(--dourado),var(--vermelho))}
+
+  /* BARRA TOPO COM TIMER VIBRANTE */
+  .topbar{
+    background:linear-gradient(90deg,var(--vermelho-escuro),var(--vermelho),#d61f2c,var(--vermelho-escuro));
+    color:#fff;
+    text-align:center;
+    font:800 .8rem/1.35 Montserrat,sans-serif;
+    padding:10px 12px;
+    text-transform:uppercase;
+    letter-spacing:.3px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:3px solid var(--dourado);
+    box-shadow:0 6px 20px rgba(179,18,31,.45);
+  }
+  .topbar-inner{
+    display:inline-flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:6px 8px;
+    animation:vibrarAlerta 2.2s ease-in-out infinite !important;
+  }
+  .topbar b{color:var(--dourado-2);text-decoration:underline;text-underline-offset:2px}
+  .timer-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    background:var(--dourado-2);
+    color:var(--vermelho-escuro);
+    font:900 .82rem/1 Montserrat,sans-serif;
+    padding:5px 10px;
+    border-radius:99px;
+    box-shadow:0 0 12px rgba(245,210,122,.8);
+    animation:pulsoBadge 1.1s ease-in-out infinite !important;
+  }
+  @keyframes pulsoBadge{
+    0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(245,210,122,.7); }
+    50% { transform: scale(1.08); box-shadow: 0 0 18px rgba(245,210,122,1); }
+  }
+  @keyframes vibrarAlerta{
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    10% { transform: translate3d(-2px, -1px, 0) rotate(-0.6deg) scale(1.02); }
+    20% { transform: translate3d(2px, 1px, 0) rotate(0.6deg) scale(1.02); }
+    30% { transform: translate3d(-2px, 1px, 0) rotate(-0.4deg) scale(1.02); }
+    40% { transform: translate3d(2px, -1px, 0) rotate(0.4deg) scale(1.02); }
+    50% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;padding:36px 0 48px;text-align:center;
+        background:radial-gradient(ellipse at top,#21733f 0%,var(--verde) 55%,#0c3a1f 100%);color:#fff}
+  .neve{position:absolute;inset:0;pointer-events:none}
+  .neve i{position:absolute;color:#fff;opacity:.7;animation:cair linear infinite}
+  @keyframes cair{from{transform:translateY(-100vh)}to{transform:translateY(100vh) rotate(360deg)}}
+  .hero-logo{width:min(72%,300px);height:auto;margin:0 auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+  .hero h1{margin-bottom:14px}
+  .hero-tag-app{
+    display:inline-block;
+    margin-bottom:10px;
+    padding:6px 14px;
+    border-radius:99px;
+    background:rgba(245,210,122,.18);
+    border:1.5px solid var(--dourado-2);
+    color:var(--dourado-2);
+    font:800 .78rem Montserrat,sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+  }
+  .hero p.lead{font-weight:700;font-size:1.15rem;max-width:420px;margin:0 auto 22px;color:#f3efe4}
+  .hero-img{width:100%;height:auto;border-radius:var(--raio);border:4px solid var(--dourado);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+  .hero .texto{margin:24px auto 0;max-width:440px;padding:16px 18px;border-radius:16px;color:#fff;font-weight:700;font-size:1.06rem;line-height:1.55;
+               background:rgba(255,255,255,.1);border:1.5px solid rgba(245,210,122,.55);box-shadow:0 10px 24px rgba(0,0,0,.18);text-shadow:0 1px 2px rgba(0,0,0,.25)}
+  .hero .texto b{color:var(--dourado-2)}
+  .preco{margin-top:22px}
+  .preco .de{font-weight:800;color:#ffb3b9;text-decoration:line-through;text-decoration-thickness:3px;font-size:1.15rem}
+  .preco .por{font:800 .85rem Montserrat;letter-spacing:1px;margin-top:4px;color:#e8efe9}
+  .preco .valor{font:900 clamp(3rem,15vw,4rem)/1 Montserrat;color:var(--dourado-2);text-shadow:0 4px 0 rgba(0,0,0,.25)}
+  .preco .valor small{font-size:.45em;vertical-align:top;margin-right:4px}
+  .aviso-preco{display:inline-block;margin-top:10px;padding:5px 14px;border-radius:99px;background:#fff;color:var(--vermelho);font:800 .8rem Montserrat;text-transform:uppercase}
+
+  /* BOTÃO */
+  .btn{display:block;width:100%;max-width:440px;margin:22px auto 0;padding:19px 18px;border:0;border-radius:99px;cursor:pointer;text-align:center;
+       font:900 1.05rem Montserrat,sans-serif;color:#fff;text-transform:uppercase;text-decoration:none;letter-spacing:.3px;
+       background:linear-gradient(180deg,#2ea458,var(--verde-2));box-shadow:0 6px 0 #0f4d25,0 14px 26px rgba(20,83,45,.35);
+       animation:pulso 1.8s ease-in-out infinite !important;transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:disabled{opacity:.65;cursor:wait}
+  .btn.verm{background:linear-gradient(180deg,var(--vermelho-2),var(--vermelho));box-shadow:0 6px 0 var(--vermelho-escuro),0 14px 26px rgba(179,18,31,.35)}
+  @keyframes pulso{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+  .seguro{font-size:.78rem;color:var(--suave);text-align:center;margin-top:10px;font-weight:700}
+  .hero .seguro{color:#cfe2d4}
+
+  /* BENEFÍCIOS */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+  .card{--cor:var(--verde-2);--tom:#e3f2e7;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;
+        background:linear-gradient(180deg,#fff 0%,#fffaf0 100%);border:1px solid var(--bege-2);border-radius:22px;padding:24px 12px 20px;text-align:center;
+        box-shadow:0 10px 24px rgba(60,30,10,.08);font:800 .88rem/1.25 Montserrat;color:var(--texto);transition:transform .2s,box-shadow .2s}
+  .card:nth-child(4n+2),.card:nth-child(4n+3){--cor:var(--vermelho);--tom:#fde4e6}
+  .card::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:linear-gradient(90deg,var(--cor),var(--dourado),var(--cor))}
+  .card::after{content:"❄";position:absolute;top:8px;right:10px;font-size:1.5rem;line-height:1;color:var(--cor);opacity:.13}
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(60,30,10,.14)}
+  .card .ic img{width:44px;height:44px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.12))}
+  .card .ic{width:62px;height:62px;margin-bottom:12px;border-radius:50%;display:grid;place-items:center;font-size:1.75rem;
+            background:radial-gradient(circle at 35% 30%,#fff 0%,var(--tom) 70%);
+            box-shadow:0 0 0 3px #fff,0 0 0 5px var(--dourado-2),0 8px 16px rgba(60,30,10,.15)}
+
+  /* CARDÁPIO */
+  .prato{background:var(--branco);border-radius:var(--raio);overflow:hidden;box-shadow:var(--sombra);text-align:center}
+  .prato img{width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+  .prato h3{color:var(--vermelho);font-size:.95rem;font-weight:800;padding:14px 10px 4px}
+  .prato p{font-size:.84rem;color:var(--suave);padding:0 12px 16px}
+
+  /* DEPOIMENTOS */
+  .dep-bg{background:var(--verde-claro)}
+  .carrossel{position:relative;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:16px;padding:14px 0 24px;scrollbar-width:none;perspective:900px}
+  .carrossel::before,.carrossel::after{content:"";flex:0 0 calc(15% - 14px)}
+  .carrossel > *{transform:scale(.8);opacity:.35;filter:blur(1.5px) saturate(.6);
+                 transition:transform .9s cubic-bezier(.22,1,.36,1),opacity .9s,filter .9s,box-shadow .9s !important}
+  .carrossel > .antes{transform:scale(.8) rotateY(32deg) translateX(8%)}
+  .carrossel > .depois{transform:scale(.8) rotateY(-32deg) translateX(-8%)}
+  .carrossel > .ativo{transform:scale(1);opacity:1;filter:none;box-shadow:0 22px 40px rgba(20,83,45,.35),0 0 0 3px var(--dourado-2);
+                      animation:flutuar 3s ease-in-out infinite !important}
+  @keyframes flutuar{0%,100%{translate:0 0}50%{translate:0 -8px}}
+  .carrossel::-webkit-scrollbar{display:none}
+  .carrossel img{flex:0 0 70%;width:70%;height:auto;scroll-snap-align:center;border-radius:var(--raio);box-shadow:var(--sombra);border:3px solid #fff}
+
+  /* PRA VOCÊ */
+  .lista{background:var(--branco);border-radius:var(--raio);box-shadow:var(--sombra);padding:8px 18px;margin-top:24px;list-style:none}
+  .lista li{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed var(--bege-2);font-weight:800;font-size:.95rem}
+  .lista li:last-child{border:0}
+  .lista li::before{content:"✓";flex:0 0 26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--verde-2);color:#fff;font-weight:900}
+
+  /* BÔNUS */
+  .bonus-bg{background:linear-gradient(180deg,var(--bege) 0%,#f3e3c3 100%)}
+  .bonus{position:relative;display:flex;gap:14px;align-items:center;background:var(--branco);border-radius:var(--raio);padding:20px 16px 16px;margin-top:22px;
+         box-shadow:var(--sombra);border:2px solid transparent;background-clip:padding-box}
+  .bonus .tag{position:absolute;top:-11px;left:12px;background:var(--vermelho);color:#fff;font:900 .7rem Montserrat;padding:4px 10px;border-radius:6px;text-transform:uppercase}
+  .bonus img{flex:0 0 88px;width:88px;height:auto;margin:-14px 0 -6px;filter:drop-shadow(0 8px 10px rgba(0,0,0,.3));transform:rotate(-4deg)}
+  .bonus h3{color:var(--vermelho);font-size:1rem;font-weight:900}
+  .bonus p{font-size:.85rem;color:var(--suave)}
+  .bonus .gratis{display:flex;align-items:center;gap:10px;margin-top:6px;font-weight:800;font-size:.85rem}
+  .bonus .gratis s{color:#9a8f88}
+  .bonus .gratis b{background:var(--verde-claro);color:var(--verde-2);padding:3px 10px;border-radius:99px;font-size:.75rem;text-transform:uppercase}
+  .total-bonus{margin-top:26px;text-align:center;background:var(--verde);color:#fff;border-radius:var(--raio);padding:18px;font-weight:800}
+  .total-bonus s{color:#ffb3b9} .total-bonus b{color:var(--dourado-2);font:900 1.4rem Montserrat;display:block}
+
+  /* OFERTAS */
+  .oferta{background:var(--branco);border-radius:24px;padding:30px 20px 24px;margin-top:30px;box-shadow:var(--sombra);text-align:center;position:relative}
+  .oferta.top{border:4px solid var(--verde-2);box-shadow:0 0 0 6px rgba(31,122,63,.15),0 20px 40px rgba(20,83,45,.25)}
+  .oferta .rotulo{position:absolute;top:-16px;left:50%;transform:translateX(-50%);white-space:nowrap;background:linear-gradient(180deg,var(--vermelho-2),var(--vermelho));
+                  color:#fff;font:900 .8rem Montserrat;padding:8px 18px;border-radius:99px;text-transform:uppercase;box-shadow:0 4px 0 var(--vermelho-escuro)}
+  .oferta .chip{display:inline-block;font:900 .72rem Montserrat;text-transform:uppercase;padding:5px 12px;border-radius:99px;background:var(--bege);color:var(--suave)}
+  .oferta.top .chip{background:var(--dourado-2);color:var(--vermelho-escuro)}
+  .oferta h3{font-size:1.25rem;font-weight:900;margin:12px 0 16px}
+  .oferta .combo{width:calc(100% + 16px);max-width:none;height:auto;margin:4px -8px 18px}
+  .oferta .capa{width:170px;height:auto;margin:4px auto 20px;filter:drop-shadow(0 14px 18px rgba(0,0,0,.3))}
+  .oferta ul{list-style:none;text-align:left;font-weight:700;font-size:.92rem}
+  .oferta ul li{padding:5px 0 5px 26px;position:relative}
+  .oferta ul li::before{content:"✓";position:absolute;left:4px;color:var(--verde-2);font-weight:900}
+  .oferta ul li.b{background:#fdf1f1;border:1px solid #f6caca;border-radius:10px;padding:8px 10px 8px 34px;margin-top:6px;font-size:.86rem}
+  .oferta ul li.b::before{content:"🎁";left:10px}
+  .oferta .valor{font:900 3.4rem/1 Montserrat;color:var(--verde-2);margin-top:6px}
+  .oferta .valor small{font-size:.45em;vertical-align:top}
+  .oferta .unico{font:800 .75rem Montserrat;color:#9a8f88;text-transform:uppercase;margin-top:18px}
+  .economia{display:inline-block;margin-top:10px;background:var(--vermelho);color:#fff;font:900 .8rem Montserrat;padding:6px 12px;border-radius:8px;transform:rotate(-2deg)}
+
+  /* AUTORA */
+  .autora{background:var(--branco);border-radius:var(--raio);box-shadow:var(--sombra);padding:22px;margin-top:24px;display:flex;gap:16px;align-items:center}
+  .autora img{flex:0 0 92px;width:92px;height:92px;border-radius:50%;border:3px solid var(--dourado)}
+  .autora h3{font-size:1.05rem}
+  .autora p{font-size:.88rem;color:var(--suave)}
+
+  /* GARANTIA */
+  .garantia{background:radial-gradient(ellipse at top,#1d6a3a,var(--verde) 60%,#0b3119);color:#fff;text-align:center}
+  .selo{width:190px;height:auto;margin:0 auto 20px;filter:drop-shadow(0 12px 22px rgba(0,0,0,.45))}
+  .garantia h2{color:var(--dourado-2)}
+  .garantia p{max-width:430px;margin:14px auto 0;color:#dfeee3}
+
+  /* FAQ */
+  details{background:var(--branco);border:1px solid var(--bege-2);border-radius:14px;margin-top:10px;box-shadow:0 4px 12px rgba(60,30,10,.06)}
+  details:first-of-type{margin-top:24px}
+  summary{cursor:pointer;list-style:none;padding:16px 44px 16px 16px;font-weight:800;position:relative}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;
+                 background:var(--vermelho);color:#fff;display:grid;place-items:center;font-weight:900}
+  details[open] summary::after{content:"–";background:var(--verde-2)}
+  details p{padding:0 16px 16px;color:var(--suave);font-size:.93rem}
+  .final{text-align:center;margin-top:36px}
+  .final h3{font-size:1.3rem}
+  .final p{color:var(--suave);margin-top:6px}
+
+  footer{background:var(--vermelho-escuro);color:#f1d9db;text-align:center;font-size:.8rem;padding:26px 16px;border-top:4px solid var(--dourado)}
+  footer a{margin:0 6px}
+
+  /* NOTIFICAÇÃO DE PROVA SOCIAL INFERIOR */
+  .notif-popup{
+    position:fixed;
+    bottom:16px;
+    left:16px;
+    right:16px;
+    max-width:390px;
+    margin:0 auto;
+    background:linear-gradient(135deg,#ffffff 0%,#f5fbf7 100%);
+    border:2px solid var(--verde-2);
+    border-left:6px solid var(--verde-2);
+    border-radius:16px;
+    padding:12px 14px;
+    box-shadow:0 14px 34px rgba(12,58,31,.28);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    z-index:95;
+    transform:translateY(140%);
+    opacity:0;
+    pointer-events:none;
+    transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .45s ease !important;
+  }
+  .notif-popup.visivel{
+    transform:translateY(0);
+    opacity:1;
+    pointer-events:auto;
+  }
+  .notif-icone{
+    flex:0 0 42px;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--verde-2),var(--verde));
+    color:#fff;
+    display:grid;
+    place-items:center;
+    font-size:1.25rem;
+    box-shadow:0 4px 10px rgba(20,83,45,.3);
+  }
+  .notif-texto{
+    font-size:.84rem;
+    line-height:1.35;
+    color:var(--texto);
+  }
+  .notif-texto strong{
+    color:var(--verde);
+    font-weight:900;
+  }
+  .notif-texto .destaque-plano{
+    color:var(--vermelho);
+    font-weight:900;
+  }
+  .notif-tempo{
+    display:block;
+    font-size:.72rem;
+    color:var(--suave);
+    margin-top:2px;
+    font-weight:700;
+  }
+
+  /* ============================================================================
+     PÁGINA / ETAPA DE CHECKOUT INTERATIVO PIX
+     ============================================================================ */
+  #pagina-checkout{
+    display:none;
+    min-height:100vh;
+    background:var(--bege);
+  }
+  body.modo-checkout #pagina-vendas{
+    display:none;
+  }
+  body.modo-checkout #pagina-checkout{
+    display:block;
+    animation:fadeInCheckout .4s ease !important;
+  }
+  @keyframes fadeInCheckout{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  .checkout-hero{
+    background:radial-gradient(ellipse at top,#21733f 0%,var(--verde) 60%,#0c3a1f 100%);
+    color:#fff;
+    padding:24px 0 42px;
+    text-align:center;
+    border-bottom:4px solid var(--dourado);
+  }
+  .btn-voltar-topo{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(255,255,255,.12);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.28);
+    padding:7px 14px;
+    border-radius:99px;
+    font:700 .78rem Montserrat,sans-serif;
+    cursor:pointer;
+    margin-bottom:14px;
+    transition:background .2s;
+  }
+  .btn-voltar-topo:hover{background:rgba(255,255,255,.22)}
+  .checkout-logo{
+    width:min(58%,220px);
+    height:auto;
+    margin:0 auto 14px;
+    filter:drop-shadow(0 10px 18px rgba(0,0,0,.4));
+  }
+  .checkout-parabens{
+    font:900 clamp(1.35rem,5.5vw,1.85rem)/1.2 Montserrat,sans-serif;
+    color:var(--dourado-2);
+    text-transform:uppercase;
+    max-width:460px;
+    margin:0 auto;
+    text-shadow:0 3px 10px rgba(0,0,0,.3);
+  }
+  .checkout-parabens-sub{
+    font-size:.95rem;
+    color:#e5f3e8;
+    margin-top:8px;
+    font-weight:700;
+  }
+
+  /* ABA PRINCIPAL DO CHECKOUT */
+  .checkout-aba{
+    background:var(--branco);
+    border-radius:24px;
+    padding:26px 20px 28px;
+    margin:-26px auto 0;
+    box-shadow:0 18px 45px rgba(20,40,20,.18);
+    border:3px solid var(--dourado);
+    position:relative;
+    z-index:5;
+  }
+  .passos-barra{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-bottom:20px;
+    font:800 .74rem Montserrat,sans-serif;
+    text-transform:uppercase;
+  }
+  .passo-item{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 12px;
+    border-radius:99px;
+    background:var(--bege);
+    color:var(--suave);
+    transition:all .3s;
+  }
+  .passo-item.ativo{
+    background:var(--verde-2);
+    color:#fff;
+    box-shadow:0 4px 12px rgba(31,122,63,.3);
+  }
+  .passo-item.concluido{
+    background:var(--verde-claro);
+    color:var(--verde);
+  }
+
+  /* RESUMO DO PLANO SELECIONADO E SELETOR INTERATIVO */
+  .resumo-plano{
+    background:linear-gradient(135deg,#f4fbf6 0%,#e5f3e8 100%);
+    border:2px solid var(--verde-2);
+    border-radius:16px;
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:18px;
+    text-align:left;
+  }
+  .resumo-plano-info .tag-plano{
+    display:inline-block;
+    background:var(--verde-2);
+    color:#fff;
+    font:900 .65rem Montserrat,sans-serif;
+    text-transform:uppercase;
+    padding:3px 8px;
+    border-radius:6px;
+    margin-bottom:4px;
+  }
+  .resumo-plano-info h4{
+    font:900 .95rem/1.25 Montserrat,sans-serif;
+    color:var(--texto);
+  }
+  .resumo-plano-info p{
+    font-size:.78rem;
+    color:var(--suave);
+    font-weight:700;
+    margin-top:2px;
+  }
+  .resumo-plano-preco{
+    text-align:right;
+    flex-shrink:0;
+  }
+  .resumo-plano-preco .preco-de{
+    font-size:.75rem;
+    color:#9a8f88;
+    text-decoration:line-through;
+    font-weight:800;
+  }
+  .resumo-plano-preco .preco-por{
+    font:900 1.55rem/1 Montserrat,sans-serif;
+    color:var(--verde-2);
+  }
+
+  /* UPGRADE BUMP INTERATIVO (aparece quando está no plano de R$ 10) */
+  .bump-upgrade{
+    background:linear-gradient(135deg,#fff8e6 0%,#ffefcc 100%);
+    border:2px dashed var(--vermelho);
+    border-radius:16px;
+    padding:14px;
+    margin-bottom:18px;
+    text-align:left;
+    cursor:pointer;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .bump-upgrade:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(179,18,31,.15);
+  }
+  .bump-upgrade-topo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font:900 .84rem Montserrat,sans-serif;
+    color:var(--vermelho);
+  }
+  .bump-upgrade p{
+    font-size:.8rem;
+    color:var(--texto);
+    font-weight:700;
+    margin-top:6px;
+  }
+
+  /* QUADRO DE EMAIL */
+  .quadro-email{
+    background:#fdfaf3;
+    border:2px solid var(--bege-2);
+    border-radius:18px;
+    padding:18px 16px;
+    text-align:left;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  .quadro-email:focus-within{
+    border-color:var(--verde-2);
+    box-shadow:0 0 0 4px rgba(31,122,63,.12);
+  }
+  .label-email{
+    display:block;
+    font:900 .98rem/1.3 Montserrat,sans-serif;
+    color:var(--texto);
+    margin-bottom:10px;
+  }
+  .input-email-wrap{
+    position:relative;
+    display:flex;
+    align-items:center;
+  }
+  .input-email-wrap span.ic-mail{
+    position:absolute;
+    left:14px;
+    font-size:1.2rem;
+    pointer-events:none;
+  }
+  .input-email{
+    width:100%;
+    padding:16px 16px 16px 44px;
+    font:700 1rem Nunito,sans-serif;
+    color:var(--texto);
+    background:#fff;
+    border:2px solid #d8cbb8;
+    border-radius:14px;
+    outline:none;
+    transition:border-color .2s;
+  }
+  .input-email:focus{
+    border-color:var(--verde-2);
+  }
+  .chips-dominio{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:10px;
+  }
+  .chip-dom{
+    background:#fff;
+    border:1px solid var(--bege-2);
+    border-radius:99px;
+    padding:4px 10px;
+    font:800 .74rem Nunito,sans-serif;
+    color:var(--suave);
+    cursor:pointer;
+    transition:all .15s;
+  }
+  .chip-dom:hover{
+    background:var(--verde-claro);
+    color:var(--verde);
+    border-color:var(--verde-2);
+  }
+  .erro-msg{
+    display:none;
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:10px;
+    background:#fde8e9;
+    border:1px solid #f5b5b9;
+    color:var(--vermelho);
+    font-weight:800;
+    font-size:.84rem;
+  }
+
+  .btn-concluir-pix{
+    margin-top:18px;
+    font-size:1.05rem;
+    padding:20px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+
+  .selos-checkout-mini{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:14px;
+    font-size:.76rem;
+    font-weight:800;
+    color:var(--suave);
+  }
+
+  /* ÁREA DO QR CODE PIX GERADO */
+  #etapa-pix-gerado{
+    display:none;
+    text-align:center;
+    animation:fadeInCheckout .35s ease !important;
+  }
+  .status-pix-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#fff8e1;
+    border:1.5px solid var(--dourado);
+    color:#8a5a00;
+    font:800 .8rem Montserrat,sans-serif;
+    padding:7px 14px;
+    border-radius:99px;
+    margin-bottom:14px;
+  }
+  .ponto-pulsante{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#e69500;
+    animation:piscarPonto 1.2s infinite !important;
+  }
+  @keyframes piscarPonto{
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:.35;transform:scale(1.3)}
+  }
+  .qr-frame{
+    background:#fff;
+    border:3px solid var(--verde-2);
+    border-radius:20px;
+    padding:16px;
+    width:fit-content;
+    margin:0 auto 16px;
+    box-shadow:0 12px 28px rgba(20,83,45,.15);
+  }
+  .qr-frame img{
+    width:230px;
+    height:230px;
+    margin:0 auto;
+    border-radius:10px;
+  }
+  .pix-instrucao{
+    font-size:.9rem;
+    color:var(--texto);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  .caixa-copia-cola{
+    background:#f4efe6;
+    border:2px dashed #c7b79e;
+    border-radius:14px;
+    padding:12px;
+    margin-bottom:12px;
+  }
+  .input-copia-cola{
+    width:100%;
+    border:0;
+    background:transparent;
+    font:700 .78rem monospace;
+    color:var(--texto);
+    text-align:center;
+    word-break:break-all;
+    outline:none;
+  }
+  .btn-copiar-pix{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    width:100%;
+    padding:18px;
+    border:0;
+    border-radius:99px;
+    background:linear-gradient(180deg,#2ea458,var(--verde-2));
+    color:#fff;
+    font:900 1rem Montserrat,sans-serif;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow:0 6px 0 #0f4d25,0 12px 24px rgba(20,83,45,.3);
+    transition:all .2s;
+  }
+  .btn-copiar-pix.copiado{
+    background:linear-gradient(180deg,#14532d,#0c3a1f);
+  }
+  .passos-pagamento-pix{
+    text-align:left;
+    background:#f9f5ec;
+    border-radius:14px;
+    padding:14px 16px;
+    margin-top:18px;
+    font-size:.84rem;
+    font-weight:700;
+    color:var(--texto);
+  }
+  .passos-pagamento-pix div{
+    padding:4px 0;
+  }
+  .passos-pagamento-pix b{
+    color:var(--verde-2);
+  }
+  .link-trocar-email{
+    display:inline-block;
+    margin-top:14px;
+    font-size:.8rem;
+    font-weight:800;
+    color:var(--suave);
+    text-decoration:underline;
+    cursor:pointer;
+    background:none;
+    border:0;
+  }
+
+  /* TELA DE PAGAMENTO APROVADO */
+  #etapa-pix-aprovado{
+    display:none;
+    text-align:center;
+    padding:20px 10px;
+  }
+  .icone-aprovado{
+    width:76px;
+    height:76px;
+    border-radius:50%;
+    background:var(--verde-2);
+    color:#fff;
+    font-size:2.4rem;
+    display:grid;
+    place-items:center;
+    margin:0 auto 14px;
+    box-shadow:0 10px 24px rgba(31,122,63,.35);
+  }
+
+  .revelar{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+  .revelar.on{opacity:1;transform:none}
+</style>
+<!-- Meta Pixel -->
+<script async="" src="js/fbevents.js"></script><script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1799238327943406');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1799238327943406&ev=PageView&noscript=1"></noscript>
+</head>
+<body>
+
+<!-- TOPBAR COM TIMER DE CONTAGEM REGRESSIVA E ANIMAÇÃO VIBRANTE -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>🔥 Preço promocional somente até <b id="data-celular">--/--/----</b> às <b id="hora-limite">--:--</b></span>
+    <span class="timer-badge">⏳ <span id="timer-regressivo">14:00</span></span>
+  </div>
+</div>
+
+<!-- =========================================================================
+     ETAPA 1: PÁGINA DE VENDAS PRINCIPAL
+     ========================================================================= -->
+<div id="pagina-vendas">
+
+  <header class="hero">
+    <div class="neve" aria-hidden="true"></div>
+    <div class="wrap" style="position:relative">
+      <div class="hero-tag-app">📱 Aplicativo de Receitas Baratas e Lucrativas</div>
+      <h1><img class="hero-logo" src="images/logo.webp" width="648" height="720" alt="Aplicativo 120 Receitas Culinárias Natalinas" fetchpriority="high"></h1>
+      <p class="lead">APLICATIVO DE RECEITAS BARATAS E LUCRATIVAS PARA PREPARAR SUA CEIA SEM GASTAR MUITA GRANA!</p>
+      <img class="hero-img" src="images/hero.webp" width="1448" height="1086" alt="Aplicativo de Receitas Baratas e Lucrativas para Ceia de Natal" fetchpriority="high">
+      <p class="texto">Com o nosso <b>aplicativo de receitas baratas e lucrativas</b>, uma ceia bonita <b>não precisa apertar suas contas.</b> Escolha pratos com ingredientes acessíveis, receba a família com carinho e até lucre no Natal <b>sem gastar demais nas compras.</b></p>
+      <div class="preco">
+        <div class="de">De R$ 27,00</div>
+        <div class="por">POR APENAS</div>
+        <div class="valor"><small>R$</small>10,00</div>
+        <div class="aviso-preco">Só o aplicativo · Com os 5 bônus: R$ 18</div>
+      </div>
+      <a class="btn verm" href="#ofertas">🎄 Quero acessar o aplicativo</a>
+      <p class="seguro">🔒 Compra segura · Acesso imediato ao aplicativo no seu e-mail</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <h2>Mais carinho à mesa,<br><span class="r">menos aperto no bolso</span></h2>
+      <div class="divisor"></div>
+      <div class="grid revelar">
+        <div class="card"><span class="ic"><img src="images/livro.webp" width="40" height="40" alt=""></span>120 receitas baratas e lucrativas</div>
+        <div class="card"><span class="ic"><img src="images/folhas.webp" width="40" height="40" alt=""></span>Ingredientes acessíveis</div>
+        <div class="card"><span class="ic"><img src="images/coxa.webp" width="40" height="40" alt=""></span>Uma ceia completa</div>
+        <div class="card"><span class="ic"><img src="images/carrinho.webp" width="40" height="40" alt=""></span>Mais controle das compras</div>
+        <div class="card"><span class="ic"><img src="images/dinheiro.webp" width="40" height="40" alt=""></span>Receitas baratas e lucrativas</div>
+        <div class="card"><span class="ic"><img src="images/prato.webp" width="40" height="40" alt=""></span>Opções para toda a família</div>
+        <div class="card"><span class="ic"><img src="images/bloco.webp" width="40" height="40" alt=""></span>Menos dúvida no cardápio</div>
+        <div class="card"><span class="ic"><img src="images/celular.webp" width="40" height="40" alt=""></span>Aplicativo prático no celular</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--branco)">
+    <div class="wrap">
+      <h2>Da entrada <span class="r">à sobremesa</span></h2>
+      <div class="divisor"></div>
+      <p class="sub">Ideias no aplicativo de receitas baratas e lucrativas para montar uma mesa completa que cabe no seu planejamento.</p>
+      <div class="grid revelar">
+        <div class="prato"><img src="images/prato-entradas.webp" width="640" height="640" alt="Torradas com tomate e ricota" loading="lazy"><h3>Entradas para compartilhar</h3><p>Comece a receber sem gastar todo o orçamento.</p></div>
+        <div class="prato"><img src="images/prato-frango.webp" width="640" height="640" alt="Frango assado com batatas e cenoura" loading="lazy"><h3>Frango de festa</h3><p>Uma alternativa econômica e lucrativa para o prato principal.</p></div>
+        <div class="prato"><img src="images/prato-arroz.webp" width="640" height="640" alt="Arroz colorido com legumes" loading="lazy"><h3>Arroz colorido</h3><p>Ingredientes simples com apresentação caprichada.</p></div>
+        <div class="prato"><img src="images/prato-farofa.webp" width="640" height="640" alt="Farofa com ovos e salsinha" loading="lazy"><h3>Farofas especiais</h3><p>Mais sabor para completar a mesa.</p></div>
+        <div class="prato"><img src="images/prato-salada-batata.webp" width="640" height="640" alt="Salada de batata com ervilha e cenoura" loading="lazy"><h3>Saladas cremosas</h3><p>Acompanhamentos que rendem e agradam a todos.</p></div>
+        <div class="prato"><img src="images/prato-gratinado.webp" width="640" height="640" alt="Frango gratinado com milho" loading="lazy"><h3>Gratinados de forno</h3><p>Pratos que servem muita gente gastando pouco.</p></div>
+        <div class="prato"><img src="images/prato-sobremesa.webp" width="640" height="640" alt="Pavê de chocolate" loading="lazy"><h3>Sobremesas econômicas</h3><p>Um final doce para compartilhar ou vender.</p></div>
+        <div class="prato"><img src="images/prato-cardapio.webp" width="640" height="640" alt="Mesa de ceia de Natal completa" loading="lazy"><h3>Cardápio completo</h3><p>Escolha a combinação que faz sentido para sua família.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dep-bg">
+    <div class="wrap">
+      <h2>Veja quem já<br><span class="g">preparou as receitas</span></h2>
+      <div class="divisor"></div>
+      <div class="carrossel" id="carrossel-home">
+        <img src="images/cliente-1.png" alt="Depoimento de cliente 1" loading="lazy" class="ativo">
+        <img src="images/cliente-2.png" alt="Depoimento de cliente 2" loading="lazy" class="depois">
+        <img src="images/cliente-3.png" alt="Depoimento de cliente 3" loading="lazy" class="depois">
+        <img src="images/cliente-4.png" alt="Depoimento de cliente 4" loading="lazy" class="depois">
+      </div>
+      <a class="btn" href="#ofertas">🎄 Quero o aplicativo agora</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Esse aplicativo é para <span class="r">você</span> que…</h2>
+      <div class="divisor"></div>
+      <p class="sub">Um aplicativo de receitas baratas e lucrativas feito para facilitar sua ceia:</p>
+      <ul class="lista revelar">
+        <li>Quer receber bem sem estourar o orçamento com receitas baratas e lucrativas.</li>
+        <li>Tem medo de gastar caro e a receita não dar certo.</li>
+        <li>Não sabe quais pratos escolher para uma ceia completa e econômica.</li>
+        <li>Quer evitar compras exageradas e desperdício no mercado.</li>
+        <li>Precisa organizar o preparo pelo aplicativo para não passar o dia inteiro na cozinha.</li>
+        <li>Quer uma mesa bonita (ou até vender pratos natalinos) sem gastar uma fortuna.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="bonus-bg">
+    <div class="wrap">
+      <h2>Na Super Oferta você leva<br><span class="g">5 bônus grátis</span></h2>
+      <div class="divisor"></div>
+      <p class="sub">Guias exclusivos dentro do aplicativo para comprar, organizar o preparo, conservar os alimentos e evitar desperdício.</p>
+      <div class="revelar">
+        <div class="bonus"><span class="tag">Bônus 1</span><img src="images/bonus-planejamento.webp" width="396" height="800" alt="Bônus Planejamento da Ceia" loading="lazy"><div><h3>Planejamento da Ceia</h3><p>Cardápio, quantidades ideais e cronograma de preparo.</p><div class="gratis"><s>R$ 4,00</s><b>✓ Grátis hoje</b></div></div></div>
+        <div class="bonus"><span class="tag">Bônus 2</span><img src="images/bonus-lista.webp" width="400" height="791" alt="Bônus Lista de Compras Inteligente" loading="lazy"><div><h3>Lista de Compras Inteligente</h3><p>Itens essenciais e sugestões econômicas para não desperdiçar.</p><div class="gratis"><s>R$ 4,00</s><b>✓ Grátis hoje</b></div></div></div>
+        <div class="bonus"><span class="tag">Bônus 3</span><img src="images/bonus-substituicoes.webp" width="400" height="799" alt="Bônus Substituições Econômicas" loading="lazy"><div><h3>Substituições Econômicas</h3><p>Trocas inteligentes e mais baratas, com o mesmo sabor.</p><div class="gratis"><s>R$ 4,00</s><b>✓ Grátis hoje</b></div></div></div>
+        <div class="bonus"><span class="tag">Bônus 4</span><img src="images/bonus-armazenamento.webp" width="400" height="788" alt="Bônus Armazenamento e Conservação" loading="lazy"><div><h3>Armazenamento e Conservação</h3><p>Como guardar, congelar com segurança e manter o sabor.</p><div class="gratis"><s>R$ 4,00</s><b>✓ Grátis hoje</b></div></div></div>
+        <div class="bonus"><span class="tag">Bônus 5</span><img src="images/bonus-sobras.webp" width="400" height="795" alt="Bônus Aproveitamento das Sobras" loading="lazy"><div><h3>Aproveitamento das Sobras</h3><p>Transforme o que sobrou em novos pratos e evite o desperdício.</p><div class="gratis"><s>R$ 4,00</s><b>✓ Grátis hoje</b></div></div></div>
+      </div>
+      <div class="total-bonus">Só nos bônus são <s>R$ 20,00</s> <b>que você leva de presente 🎁</b></div>
+    </div>
+  </section>
+
+  <section id="ofertas">
+    <div class="wrap">
+      <h2>Escolha seu <span class="r">plano</span></h2>
+      <div class="divisor"></div>
+      <p class="sub">Leve o Aplicativo de Receitas Baratas e Lucrativas por R$ 10 ou escolha a Super Oferta: Aplicativo + 5 bônus por R$ 18.</p>
+
+      <div class="oferta top">
+        <span class="rotulo">⭐ Mais escolhida</span>
+        <span class="chip">Super Oferta · Completa</span>
+        <h3>Aplicativo de Receitas Baratas e Lucrativas + 5 Bônus</h3>
+        <img class="combo" src="images/combo-super.webp" width="900" height="655" alt="Aplicativo 120 Receitas Baratas e Lucrativas com os 5 bônus" loading="lazy">
+        <ul>
+          <li>120 receitas econômicas para uma ceia completa</li>
+          <li>Aplicativo de receitas baratas e lucrativas</li>
+          <li>Acesso imediato entregue no seu e-mail após o pagamento</li>
+          <li>7 dias de garantia incondicional</li>
+          <li class="b">Bônus 1 — Planejamento da Ceia</li>
+          <li class="b">Bônus 2 — Lista de Compras Inteligente</li>
+          <li class="b">Bônus 3 — Substituições Econômicas</li>
+          <li class="b">Bônus 4 — Armazenamento e Conservação</li>
+          <li class="b">Bônus 5 — Aproveitamento das Sobras</li>
+        </ul>
+        <p class="unico">De <s>R$ 47,00</s> · Pagamento único</p>
+        <div class="valor"><small>R$</small>18,00</div>
+        <span class="economia">Você economiza R$ 29,00</span>
+        <button type="button" class="btn" id="checkout-completo" onclick="abrirCheckout('18')">🛒 Quero a Super Oferta</button>
+        <p class="seguro">Aplicativo digital · Entrega imediata por e-mail</p>
+      </div>
+
+      <div class="oferta">
+        <span class="chip">Opção básica</span>
+        <h3>Aplicativo de Receitas Baratas e Lucrativas</h3>
+        <img class="capa" src="images/capa-basica.webp" width="400" height="777" alt="Aplicativo 120 Receitas Econômicas para Ceia de Natal" loading="lazy">
+        <ul>
+          <li>120 receitas econômicas para uma ceia completa</li>
+          <li>Aplicativo de receitas baratas e lucrativas</li>
+          <li>Acesso imediato entregue no seu e-mail após o pagamento</li>
+          <li>7 dias de garantia incondicional</li>
+        </ul>
+        <p class="unico">De <s>R$ 27,00</s> · Pagamento único</p>
+        <div class="valor" style="color:var(--vermelho)"><small>R$</small>10,00</div>
+        <button type="button" class="btn verm" id="checkout-basico" style="animation:none" onclick="abrirCheckout('10')">Comprar só o aplicativo</button>
+        <p class="seguro">Aplicativo digital · Entrega imediata por e-mail</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--branco)">
+    <div class="wrap">
+      <h2>Quem preparou <span class="r">o aplicativo</span></h2>
+      <div class="divisor"></div>
+      <div class="autora revelar">
+        <img src="images/autora.webp" width="240" height="240" alt="Amanda Silva" loading="lazy">
+        <div>
+          <h3>Amanda Silva</h3>
+          <p>Criadora do Aplicativo de Receitas Baratas e Lucrativas com 120 Receitas para Ceia de Natal: ideias práticas para preparar uma ceia completa, receber com carinho e cuidar do seu orçamento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="garantia">
+    <div class="wrap">
+      <img class="selo" src="images/selo-7-dias.webp" width="400" height="400" alt="Selo de garantia de 7 dias" loading="lazy">
+      <h2>Conheça o aplicativo com tranquilidade</h2>
+      <p>Acesse o aplicativo de receitas baratas e lucrativas e veja se ele faz sentido para você. Se não ficar satisfeita, solicite o reembolso dentro de 7 dias, conforme as condições da compra.</p>
+      <a class="btn verm" href="#ofertas">Quero garantir minha ceia</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Perguntas <span class="r">frequentes</span></h2>
+      <div class="divisor"></div>
+      <details><summary>O que vou receber ao comprar?</summary><p>Você recebe o acesso completo ao nosso Aplicativo de Receitas Baratas e Lucrativas com 120 receitas econômicas para montar uma ceia de Natal completa: entradas, pratos principais, acompanhamentos e sobremesas.</p></details>
+      <details><summary>Para quem é este aplicativo?</summary><p>Para quem quer receber a família com uma mesa bonita e saborosa sem gastar além do que pode, ou até aproveitar receitas baratas e lucrativas para fazer uma renda extra neste fim de ano.</p></details>
+      <details><summary>Qual é a diferença entre os planos?</summary><p>A opção básica (R$ 10) libera o aplicativo com as 120 receitas baratas e lucrativas. A Super Oferta (R$ 18) libera o aplicativo completo e mais 5 bônus exclusivos para planejamento, compras, substituições, armazenamento e sobras.</p></details>
+      <details><summary>Como recebo o acesso ao aplicativo?</summary><p>Assim que o pagamento via Pix for confirmado, o acesso ao aplicativo é enviado imediatamente para o e-mail que você informar na finalização, podendo usar no celular, tablet ou computador.</p></details>
+      <details><summary>Preciso de ingredientes caros?</summary><p>Não. Todas as receitas do aplicativo foram pensadas com ingredientes baratos, acessíveis e fáceis de achar em qualquer mercado.</p></details>
+      <details><summary>Quais são os 5 bônus inclusos no plano de R$ 18?</summary><p>Planejamento da Ceia, Lista de Compras Inteligente, Substituições Econômicas, Armazenamento e Conservação e Aproveitamento das Sobras.</p></details>
+      <details><summary>Quanto posso economizar?</summary><p>Depende do seu cardápio e da sua região, mas a proposta do aplicativo é trocar pratos caros por alternativas baratas, deliciosas e lucrativas, evitando compras em excesso.</p></details>
+      <details><summary>Como faço para escolher?</summary><p>Se quer só o aplicativo com as receitas, escolha o plano de R$ 10. Se quer organizar tudo do mercado até a mesa com todos os presentes, a Super Oferta de R$ 18 vale muito mais a pena.</p></details>
+      <div class="final">
+        <h3>Uma ceia bonita pode caber no seu orçamento. 🎄</h3>
+        <p>Prepare sua ceia completa com o aplicativo de receitas baratas e lucrativas.</p>
+        <a class="btn" href="#ofertas">Ver os planos</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- =========================================================================
+     ETAPA 2: PÁGINA INTERATIVA DE CHECKOUT PIX (APÓS ESCOLHER O PLANO)
+     Ordem solicitada:
+     1. Logo em cima da aba
+     2. "Parabéns pela escolha, sua ceia vai ser incrível esse ano!"
+     3. Aba para colocar o e-mail ("Digite o email para entrega do aplicativo:") + Botão ("Concluir pagamento para entrega ->") + Geração de QR Code Pix e Copia e Cola
+     4. Abaixo: Aba com os feedbacks da primeira aba
+     5. Abaixo: FAQ da primeira etapa
+     6. Embaixo do FAQ: Imagem de garantia
+     ========================================================================= -->
+<div id="pagina-checkout">
+
+  <div class="checkout-hero">
+    <div class="wrap">
+      <button type="button" class="btn-voltar-topo" onclick="voltarParaPlanos()">← Voltar para a página anterior</button>
+      <!-- Logo em cima da aba -->
+      <img class="checkout-logo" src="images/logo.webp" width="648" height="720" alt="Logo 120 Receitas">
+      <h1 class="checkout-parabens">Parabéns pela escolha, sua ceia vai ser incrível esse ano! 🎄✨</h1>
+      <p class="checkout-parabens-sub">Falta só 1 passo rápido para liberar seu Aplicativo de Receitas Baratas e Lucrativas</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- ABA PRINCIPAL DE CHECKOUT -->
+    <div class="checkout-aba">
+
+      <div class="passos-barra">
+        <div class="passo-item ativo" id="indicador-passo-1">1. Informar E-mail</div>
+        <div class="passo-item" id="indicador-passo-2">2. QR Code PIX</div>
+      </div>
+
+      <!-- Resumo interativo do plano selecionado -->
+      <div class="resumo-plano" id="card-resumo-plano">
+        <div class="resumo-plano-info">
+          <span class="tag-plano" id="checkout-tag-plano">⭐ Super Oferta + 5 Bônus</span>
+          <h4 id="checkout-nome-plano">Aplicativo de Receitas Baratas e Lucrativas + 5 Bônus</h4>
+          <p id="checkout-desc-plano">Acesso imediato + Todos os 5 bônus liberados</p>
+        </div>
+        <div class="resumo-plano-preco">
+          <div class="preco-de" id="checkout-preco-de">De R$ 47,00</div>
+          <div class="preco-por" id="checkout-preco-por">R$ 18,00</div>
+        </div>
+      </div>
+
+      <!-- Bump interativo caso a pessoa tenha escolhido o plano de R$ 10 -->
+      <div class="bump-upgrade" id="box-upgrade-18" style="display:none" onclick="alternarPlanoCheckout('18')">
+        <div class="bump-upgrade-topo">
+          <span>🎁 OFERTA ESPECIAL: Adicionar os 5 Bônus por apenas +R$ 8,00?</span>
+        </div>
+        <p>Toque aqui para mudar para o <b>Plano Completo de R$ 18,00</b> e levar o Aplicativo + Todos os 5 Bônus!</p>
+      </div>
+
+      <!-- SUB-ETAPA A: DIGITAR EMAIL E CONCLUIR PAGAMENTO -->
+      <div id="etapa-form-email">
+        <form id="form-gerar-pix" onsubmit="submeterCheckoutPix(event)" novalidate>
+          <div class="quadro-email">
+            <label class="label-email" for="input-email-cliente">Digite o email para entrega do aplicativo:</label>
+            <div class="input-email-wrap">
+              <span class="ic-mail">✉️</span>
+              <input
+                type="email"
+                id="input-email-cliente"
+                class="input-email"
+                placeholder="seuemail@gmail.com"
+                autocomplete="email"
+                inputmode="email"
+                required
+              >
+            </div>
+            <div class="chips-dominio" aria-label="Sugestões de domínio de e-mail">
+              <button type="button" class="chip-dom" onclick="completarDominio('@gmail.com')">@gmail.com</button>
+              <button type="button" class="chip-dom" onclick="completarDominio('@hotmail.com')">@hotmail.com</button>
+              <button type="button" class="chip-dom" onclick="completarDominio('@icloud.com')">@icloud.com</button>
+              <button type="button" class="chip-dom" onclick="completarDominio('@outlook.com')">@outlook.com</button>
+            </div>
+            <div class="erro-msg" id="erro-checkout"></div>
+          </div>
+
+          <button type="submit" class="btn btn-concluir-pix" id="btn-gerar-pix">
+            Concluir pagamento para entrega -&gt;
+          </button>
+        </form>
+
+        <div class="selos-checkout-mini">
+          <span>🔒 Ambiente 100% Seguro</span>
+          <span>⚡ Liberação Imediata via PIX</span>
+          <span>🛡️ Garantia de 7 Dias</span>
+        </div>
+      </div>
+
+      <!-- SUB-ETAPA B: QR CODE PIX + COPIA E COLA GERADO -->
+      <div id="etapa-pix-gerado">
+        <div class="status-pix-pill">
+          <span class="ponto-pulsante"></span>
+          <span>Aguardando pagamento · Expira em <b id="timer-expiracao-pix">15:00</b></span>
+        </div>
+
+        <p class="pix-instrucao">Escaneie o QR Code abaixo ou copie o código PIX Copia e Cola para liberar seu aplicativo em segundos:</p>
+
+        <div class="qr-frame">
+          <img id="img-qrcode-pix" src="" alt="QR Code PIX Cakto" width="230" height="230">
+        </div>
+
+        <div class="caixa-copia-cola">
+          <input type="text" id="input-brcode-pix" class="input-copia-cola" readonly value="">
+        </div>
+
+        <button type="button" class="btn-copiar-pix" id="btn-copiar-brcode" onclick="copiarCodigoPix()">
+          📋 Copiar Código PIX (Copia e Cola)
+        </button>
+
+        <div class="passos-pagamento-pix">
+          <div><b>1.</b> Clique no botão verde acima para copiar o código PIX.</div>
+          <div><b>2.</b> Abra o aplicativo do seu banco e escolha <b>PIX Copia e Cola</b> (ou escaneie o QR Code).</div>
+          <div><b>3.</b> Confirme o pagamento e seu aplicativo chegará no e-mail <b id="email-confirmado-display"></b>!</div>
+        </div>
+
+        <button type="button" class="link-trocar-email" onclick="voltarParaEdicaoEmail()">
+          ← Corrigir e-mail ou trocar de plano
+        </button>
+      </div>
+
+      <!-- SUB-ETAPA C: PAGAMENTO CONFIRMADO -->
+      <div id="etapa-pix-aprovado">
+        <div class="icone-aprovado">✓</div>
+        <h3 style="color:var(--verde);font-size:1.45rem;margin-bottom:8px">Pagamento Confirmado! 🎉</h3>
+        <p style="color:var(--texto);font-weight:700">Parabéns! Seu acesso ao <b>Aplicativo de Receitas Baratas e Lucrativas</b> já foi liberado e enviado para o seu e-mail.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ABAIXO DA ABA DE CHECKOUT: ABA COM OS FEEDBACKS DA PRIMEIRA ABA -->
+  <section class="dep-bg" style="margin-top:36px">
+    <div class="wrap">
+      <h2>Veja quem já<br><span class="g">está usando o aplicativo</span></h2>
+      <div class="divisor"></div>
+      <p class="sub">Feedbacks reais de quem já garantiu as receitas baratas e lucrativas para a ceia:</p>
+      <div class="carrossel" id="carrossel-checkout">
+        <img src="images/cliente-1.png" alt="Depoimento de cliente 1" loading="lazy" class="ativo">
+        <img src="images/cliente-2.png" alt="Depoimento de cliente 2" loading="lazy" class="depois">
+        <img src="images/cliente-3.png" alt="Depoimento de cliente 3" loading="lazy" class="depois">
+        <img src="images/cliente-4.png" alt="Depoimento de cliente 4" loading="lazy" class="depois">
+      </div>
+    </div>
+  </section>
+
+  <!-- ABAIXO DOS FEEDBACKS: O FAQ QUE TEM NA PRIMEIRA ETAPA -->
+  <section>
+    <div class="wrap">
+      <h2>Perguntas <span class="r">frequentes</span></h2>
+      <div class="divisor"></div>
+      <details><summary>O que vou receber ao comprar?</summary><p>Você recebe o acesso completo ao nosso Aplicativo de Receitas Baratas e Lucrativas com 120 receitas econômicas para montar uma ceia de Natal completa: entradas, pratos principais, acompanhamentos e sobremesas.</p></details>
+      <details><summary>Para quem é este aplicativo?</summary><p>Para quem quer receber a família com uma mesa bonita e saborosa sem gastar além do que pode, ou até aproveitar receitas baratas e lucrativas para fazer uma renda extra neste fim de ano.</p></details>
+      <details><summary>Qual é a diferença entre os planos?</summary><p>A opção básica (R$ 10) libera o aplicativo com as 120 receitas baratas e lucrativas. A Super Oferta (R$ 18) libera o aplicativo completo e mais 5 bônus exclusivos para planejamento, compras, substituições, armazenamento e sobras.</p></details>
+      <details><summary>Como recebo o acesso ao aplicativo?</summary><p>Assim que o pagamento via Pix for confirmado, o acesso ao aplicativo é enviado imediatamente para o e-mail que você informar acima, podendo usar no celular, tablet ou computador.</p></details>
+      <details><summary>Preciso de ingredientes caros?</summary><p>Não. Todas as receitas do aplicativo foram pensadas com ingredientes baratos, acessíveis e fáceis de achar em qualquer mercado.</p></details>
+      <details><summary>Quais são os 5 bônus inclusos no plano de R$ 18?</summary><p>Planejamento da Ceia, Lista de Compras Inteligente, Substituições Econômicas, Armazenamento e Conservação e Aproveitamento das Sobras.</p></details>
+      <details><summary>Quanto posso economizar?</summary><p>Depende do seu cardápio e da sua região, mas a proposta do aplicativo é trocar pratos caros por alternativas baratas, deliciosas e lucrativas, evitando compras em excesso.</p></details>
+      <details><summary>Como funciona a garantia?</summary><p>Você tem 7 dias de garantia total para acessar o aplicativo e testar as receitas com tranquilidade.</p></details>
+    </div>
+  </section>
+
+  <!-- EMBAIXO DO FAQ: A IMAGEM DE GARANTIA -->
+  <section class="garantia">
+    <div class="wrap">
+      <img class="selo" src="images/selo-7-dias.webp" width="400" height="400" alt="Selo de garantia de 7 dias" loading="lazy">
+      <h2>Garantia Incondicional de 7 Dias</h2>
+      <p>Sua compra é 100% segura. Acesse o aplicativo de receitas baratas e lucrativas agora mesmo e, se não ficar satisfeita por qualquer motivo, devolvemos 100% do seu dinheiro em até 7 dias.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- NOTIFICAÇÃO DE PROVA SOCIAL FLUTUANTE NA PARTE INFERIOR -->
+<div class="notif-popup" id="notificacao-venda" role="status" aria-live="polite">
+  <div class="notif-icone">🎁</div>
+  <div class="notif-texto">
+    <strong id="notif-nome">Gabriela</strong> acaba de levar o <span class="destaque-plano">plano de R$18</span> e garantiu os <b>5 bônus</b>
+    <span class="notif-tempo">✓ Compra verificada · agora mesmo</span>
+  </div>
+</div>
+
+<footer>
+  © 2026 · Aplicativo de Receitas Baratas e Lucrativas — 120 Receitas para Ceia de Natal<br>
+  <a href="#ofertas">Planos</a> · Compra 100% Segura via PIX
+</footer>
+
+<script>
+  /* ==========================================================================
+     1. TIMER DO TOPO: DATA DO CELULAR + HORÁRIO DO CELULAR MAIS 14 MINUTOS
+     ========================================================================== */
+  (function iniciarTimerTopo() {
+    const agora = new Date();
+    const minutosExtras = 14; // 10+ minutos acrescentados ao horário do celular da pessoa
+    const dataLimite = new Date(agora.getTime() + minutosExtras * 60 * 1000);
+
+    const formatar2 = n => String(n).padStart(2, '0');
+    const dataFormatada = agora.toLocaleDateString('pt-BR');
+    const horaLimiteFormatada = formatar2(dataLimite.getHours()) + ':' + formatar2(dataLimite.getMinutes());
+
+    document.getElementById('data-celular').textContent = dataFormatada;
+    document.getElementById('hora-limite').textContent = horaLimiteFormatada;
+
+    let segundosRestantes = minutosExtras * 60;
+    const elContagem = document.getElementById('timer-regressivo');
+
+    function atualizarRelogio() {
+      if (segundosRestantes <= 0) {
+        segundosRestantes = 5 * 60; // renova últimos minutos caso zere
+      }
+      const m = Math.floor(segundosRestantes / 60);
+      const s = segundosRestantes % 60;
+      elContagem.textContent = formatar2(m) + ':' + formatar2(s);
+      segundosRestantes--;
+    }
+    atualizarRelogio();
+    setInterval(atualizarRelogio, 1000);
+  })();
+
+  /* ==========================================================================
+     2. EFEITO DE NEVE NO HERO
+     ========================================================================== */
+  const neve = document.querySelector('.neve');
+  if (neve) {
+    for (let i = 0; i < 24; i++) {
+      const f = document.createElement('i');
+      f.textContent = '❄';
+      f.style.left = Math.random() * 100 + '%';
+      f.style.top = Math.random() * 100 + '%';
+      f.style.fontSize = 8 + Math.random() * 14 + 'px';
+      f.style.animationDuration = 6 + Math.random() * 8 + 's';
+      f.style.animationDelay = -Math.random() * 12 + 's';
+      neve.appendChild(f);
+    }
+  }
+
+  /* ==========================================================================
+     3. CARROSSÉIS DE DEPOIMENTOS (HOME E CHECKOUT)
+     ========================================================================== */
+  function configurarCarrossel(idCarrossel) {
+    const car = document.getElementById(idCarrossel);
+    if (!car) return;
+    const centro = c => c.offsetLeft + c.offsetWidth / 2;
+    const atual = () => {
+      const meio = car.scrollLeft + car.clientWidth / 2;
+      return [...car.children].reduce((m, c, i, a) => Math.abs(centro(c) - meio) < Math.abs(centro(a[m]) - meio) ? i : m, 0);
+    };
+    const dur = 900;
+    const irPara = i => {
+      if (!car.offsetParent) return; // pausa cálculo se estiver oculto
+      const itens = car.children, n = itens.length;
+      if (!n) return;
+      const c = itens[(i + n) % n];
+      const de = car.scrollLeft, para = centro(c) - car.clientWidth / 2, t0 = performance.now();
+      car.style.scrollSnapType = 'none';
+      const passo = t => {
+        const p = Math.min((t - t0) / dur, 1), e = 1 - (1 - p) ** 4;
+        car.scrollLeft = de + (para - de) * e;
+        p < 1 ? requestAnimationFrame(passo) : car.style.scrollSnapType = '';
+      };
+      requestAnimationFrame(passo);
+    };
+    let timer;
+    const autoplay = () => { clearInterval(timer); timer = setInterval(() => irPara(atual() + 1), 3000); };
+    const marcar = () => {
+      const a = atual();
+      [...car.children].forEach((c, i) => {
+        c.classList.toggle('ativo', i === a);
+        c.classList.toggle('antes', i < a);
+        c.classList.toggle('depois', i > a);
+      });
+    };
+    car.addEventListener('scroll', marcar, { passive: true });
+    marcar();
+    car.addEventListener('pointerdown', () => clearInterval(timer));
+    ['pointerup', 'pointercancel'].forEach(ev => car.addEventListener(ev, autoplay));
+    autoplay();
+  }
+
+  configurarCarrossel('carrossel-home');
+  configurarCarrossel('carrossel-checkout');
+
+  /* ==========================================================================
+     4. NOTIFICAÇÕES DE PROVA SOCIAL NA PARTE INFERIOR (NOMES MUDANDO)
+     ========================================================================== */
+  (function iniciarNotificacoes() {
+    const nomes = [
+      'Gabriela', 'Fernanda', 'Camila', 'Juliana', 'Patrícia',
+      'Mariana', 'Beatriz', 'Carolina', 'Letícia', 'Renata',
+      'Vanessa', 'Amanda', 'Larissa', 'Bianca', 'Tatiane',
+      'Priscila', 'Luciana', 'Natália', 'Cristiane', 'Aline'
+    ];
+    let indiceNome = 0;
+    const popup = document.getElementById('notificacao-venda');
+    const elNome = document.getElementById('notif-nome');
+
+    function exibirNotificacao() {
+      elNome.textContent = nomes[indiceNome % nomes.length];
+      indiceNome++;
+      popup.classList.add('visivel');
+
+      setTimeout(() => {
+        popup.classList.remove('visivel');
+      }, 4500);
+    }
+
+    // Primeira aparição com "Gabriela" logo após 3.5 segundos
+    setTimeout(() => {
+      exibirNotificacao();
+      setInterval(exibirNotificacao, 9500);
+    }, 3500);
+  })();
+
+  /* ==========================================================================
+     5. SISTEMA DE CHECKOUT PIX INTERATIVO (API CAKTO)
+     ========================================================================== */
+  let planoAtual = '18';
+  let timerExpiracaoPix = null;
+  let timerPollingPix = null;
+
+  function obterFingerprint() {
+    try {
+      let fp = localStorage.getItem('cakto_fp');
+      if (!fp) {
+        fp = 'fp_' + (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36));
+        localStorage.setItem('cakto_fp', fp);
+      }
+      return fp;
+    } catch {
+      return 'fp_' + Math.random().toString(36).slice(2);
+    }
+  }
+
+  function obterMetadataUtm() {
+    const params = new URLSearchParams(window.location.search);
+    const meta = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'sck', 'src'].forEach(k => {
+      if (params.get(k)) meta[k] = params.get(k);
+    });
+    return meta;
+  }
+
+  function atualizarResumoPlanoUI(plano) {
+    planoAtual = String(plano) === '10' ? '10' : '18';
+    const isBasico = planoAtual === '10';
+
+    document.getElementById('checkout-tag-plano').textContent = isBasico
+      ? '📱 Plano Básico'
+      : '⭐ Super Oferta + 5 Bônus';
+    document.getElementById('checkout-nome-plano').textContent = isBasico
+      ? 'Aplicativo de Receitas Baratas e Lucrativas (120 Receitas)'
+      : 'Aplicativo de Receitas Baratas e Lucrativas + 5 Bônus';
+    document.getElementById('checkout-desc-plano').textContent = isBasico
+      ? 'Acesso imediato ao aplicativo no seu e-mail'
+      : 'Acesso imediato ao aplicativo + Todos os 5 bônus grátis';
+    document.getElementById('checkout-preco-de').textContent = isBasico ? 'De R$ 27,00' : 'De R$ 47,00';
+    document.getElementById('checkout-preco-por').textContent = isBasico ? 'R$ 10,00' : 'R$ 18,00';
+    document.getElementById('box-upgrade-18').style.display = isBasico ? 'block' : 'none';
+  }
+
+  function abrirCheckout(plano) {
+    atualizarResumoPlanoUI(plano);
+    voltarParaEdicaoEmail();
+
+    document.body.classList.add('modo-checkout');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (typeof fbq === 'function') {
+      fbq('track', 'InitiateCheckout', {
+        value: planoAtual === '10' ? 10 : 18,
+        currency: 'BRL'
+      });
+    }
+
+    try {
+      history.pushState({ checkout: true, plano: planoAtual }, '', '#checkout');
+    } catch {}
+
+    setTimeout(() => {
+      const inp = document.getElementById('input-email-cliente');
+      if (inp) inp.focus();
+    }, 350);
+  }
+
+  function alternarPlanoCheckout(novoPlano) {
+    atualizarResumoPlanoUI(novoPlano);
+  }
+
+  function voltarParaPlanos() {
+    pararTimersPix();
+    document.body.classList.remove('modo-checkout');
+    const secOfertas = document.getElementById('ofertas');
+    if (secOfertas) secOfertas.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  window.addEventListener('popstate', () => {
+    if (document.body.classList.contains('modo-checkout') && location.hash !== '#checkout') {
+      pararTimersPix();
+      document.body.classList.remove('modo-checkout');
+    }
+  });
+
+  function completarDominio(dominio) {
+    const input = document.getElementById('input-email-cliente');
+    const atual = input.value.trim();
+    const base = atual.split('@')[0] || '';
+    input.value = base + dominio;
+    input.focus();
+    ocultarErroCheckout();
+  }
+
+  function mostrarErroCheckout(msg) {
+    const el = document.getElementById('erro-checkout');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  function ocultarErroCheckout() {
+    const el = document.getElementById('erro-checkout');
+    el.style.display = 'none';
+  }
+
+  function voltarParaEdicaoEmail() {
+    pararTimersPix();
+    document.getElementById('etapa-form-email').style.display = 'block';
+    document.getElementById('etapa-pix-gerado').style.display = 'none';
+    document.getElementById('etapa-pix-aprovado').style.display = 'none';
+    document.getElementById('indicador-passo-1').className = 'passo-item ativo';
+    document.getElementById('indicador-passo-2').className = 'passo-item';
+    ocultarErroCheckout();
+  }
+
+  function pararTimersPix() {
+    if (timerExpiracaoPix) clearInterval(timerExpiracaoPix);
+    if (timerPollingPix) clearInterval(timerPollingPix);
+    timerExpiracaoPix = null;
+    timerPollingPix = null;
+  }
+
+  async function submeterCheckoutPix(event) {
+    event.preventDefault();
+    ocultarErroCheckout();
+
+    const inputEmail = document.getElementById('input-email-cliente');
+    const email = inputEmail.value.trim().toLowerCase();
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      mostrarErroCheckout('Por favor, digite um e-mail válido (ex: seuemail@gmail.com) para receber o aplicativo.');
+      inputEmail.focus();
+      return;
+    }
+
+    const btn = document.getElementById('btn-gerar-pix');
+    const textoOriginal = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Gerando seu QR Code PIX...';
+
+    try {
+      const resposta = await fetch('/api/create-pix', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          plan: planoAtual,
+          email: email,
+          fingerprint: obterFingerprint(),
+          metadata: obterMetadataUtm()
+        })
+      });
+
+      const dados = await resposta.json().catch(() => ({}));
+      if (!resposta.ok || !dados.qrCode) {
+        throw new Error(dados.error || 'Não foi possível gerar o PIX agora. Verifique seu e-mail e tente novamente.');
+      }
+
+      exibirTelaQrCodePix(dados, email);
+    } catch (erro) {
+      mostrarErroCheckout(erro.message || 'Erro ao conectar com o servidor de pagamentos. Tente novamente.');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = textoOriginal;
+    }
+  }
+
+  function exibirTelaQrCodePix(dados, email) {
+    document.getElementById('etapa-form-email').style.display = 'none';
+    document.getElementById('box-upgrade-18').style.display = 'none';
+    document.getElementById('etapa-pix-gerado').style.display = 'block';
+    document.getElementById('indicador-passo-1').className = 'passo-item concluido';
+    document.getElementById('indicador-passo-1').textContent = '1. E-mail ✓';
+    document.getElementById('indicador-passo-2').className = 'passo-item ativo';
+
+    document.getElementById('email-confirmado-display').textContent = email;
+    document.getElementById('input-brcode-pix').value = dados.qrCode;
+
+    const imgQr = document.getElementById('img-qrcode-pix');
+    if (dados.qrCodeImage) {
+      imgQr.src = dados.qrCodeImage;
+    } else {
+      imgQr.src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(dados.qrCode);
+    }
+
+    // Timer de expiração de 15 minutos
+    pararTimersPix();
+    let segsPix = 15 * 60;
+    const elExp = document.getElementById('timer-expiracao-pix');
+    timerExpiracaoPix = setInterval(() => {
+      if (segsPix <= 0) {
+        clearInterval(timerExpiracaoPix);
+        elExp.textContent = 'Expirado';
+        return;
+      }
+      segsPix--;
+      const m = String(Math.floor(segsPix / 60)).padStart(2, '0');
+      const s = String(segsPix % 60).padStart(2, '0');
+      elExp.textContent = m + ':' + s;
+    }, 1000);
+
+    // Polling automático de confirmação de pagamento na Cakto a cada 5s
+    if (dados.id) {
+      timerPollingPix = setInterval(async () => {
+        try {
+          const r = await fetch('/api/check-pix?id=' + encodeURIComponent(dados.id));
+          if (!r.ok) return;
+          const st = await r.json();
+          if (st && st.isPaid) {
+            pararTimersPix();
+            document.getElementById('etapa-pix-gerado').style.display = 'none';
+            document.getElementById('etapa-pix-aprovado').style.display = 'block';
+            if (typeof fbq === 'function') {
+              fbq('track', 'Purchase', {
+                value: planoAtual === '10' ? 10 : 18,
+                currency: 'BRL'
+              });
+            }
+          }
+        } catch {}
+      }, 5000);
+    }
+  }
+
+  function copiarCodigoPix() {
+    const input = document.getElementById('input-brcode-pix');
+    const btn = document.getElementById('btn-copiar-brcode');
+    const codigo = input.value;
+    if (!codigo) return;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(codigo).catch(() => {
+        input.select();
+        document.execCommand('copy');
+      });
+    } else {
+      input.select();
+      document.execCommand('copy');
+    }
+
+    btn.classList.add('copiado');
+    btn.innerHTML = '✅ Código PIX Copiado com Sucesso!';
+    setTimeout(() => {
+      btn.classList.remove('copiado');
+      btn.innerHTML = '📋 Copiar Código PIX (Copia e Cola)';
+    }, 3500);
+  }
+
+  // Animação ao rolar
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('on')), { threshold: .15 });
+  document.querySelectorAll('.revelar').forEach(el => io.observe(el));
+</script>
+
+</body></html>
